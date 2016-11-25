@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
 
-    private static final int PERMISSIONS_REQUEST_CAMERA = 88;
+   // private static final int PERMISSIONS_REQUEST_CAMERA = 88;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         scanBtn.setOnClickListener(this);
 
-        getPermissionCamera();
+        //getPermissionCamera();
     }
 
     public void onClick(View v){
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
+    /* Using new library of ZXing 3.4.0 this won't be needed anymore....
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             // result of the request.
         }
     }
-
+    */
     // Experimental Function !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /*
     private void checkFlag() {
