@@ -7,8 +7,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.BarcodeView;
 
 import android.content.Intent;
 import android.view.View;
@@ -21,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
-
    // private static final int PERMISSIONS_REQUEST_CAMERA = 88;
 
     @Override
@@ -42,10 +44,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // Scan button action
         if(v.getId()==R.id.scan_button){
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+            //scanIntegrator.setOrientationLocked(false);
+            scanIntegrator.setBarcodeImageEnabled(true);
             scanIntegrator.initiateScan();
         }
     }
-
+    
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         // Retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // A result received
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
+            String scanImagePath = intent.getStringExtra(Intents.Scan.RESULT_BARCODE_IMAGE_PATH);
             formatTxt.setText("FORMAT: " + scanFormat);
             contentTxt.setText("CONTENT: " + scanContent);
         } else {
@@ -61,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             toast.show();
         }
     }
-
     /* Using new library of ZXing 3.4.0 this won't be needed anymore....
     @Override
     public void onRequestPermissionsResult(int requestCode,
