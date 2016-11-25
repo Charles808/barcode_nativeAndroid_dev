@@ -2,6 +2,7 @@ package com.example.charlessuresoft.barcodescanner_dev1;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.BarcodeView;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,49 +24,69 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
-    private Button scanBtn;
+    private Button scanBtn, openSiteBtn;
     private TextView formatTxt, contentTxt;
    // private static final int PERMISSIONS_REQUEST_CAMERA = 88;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         scanBtn = (Button)findViewById(R.id.scan_button);
+        openSiteBtn = (Button)findViewById(R.id.openSite_button);
         formatTxt = (TextView)findViewById(R.id.scan_format);
+        formatTxt.setText("Empty");
         contentTxt = (TextView)findViewById(R.id.scan_content);
+        contentTxt.setText("Empty");
 
         scanBtn.setOnClickListener(this);
+        openSiteBtn.setOnClickListener(this);
 
+        startScan();
         //getPermissionCamera();
+    }
+
+    private void startScan() {
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
     }
 
     public void onClick(View v){
         // Scan button action
         if(v.getId()==R.id.scan_button){
-            IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-            //scanIntegrator.setOrientationLocked(false);
-            scanIntegrator.setBarcodeImageEnabled(true);
-            scanIntegrator.initiateScan();
+            //scanIntegrator.setBarcodeImageEnabled(true);
+            startScan();
+        }
+
+        else if(v.getId()==R.id.openSite_button){
+            //float url_size = contentTxt.getTextSize();
+            //Log.d("ADebugTag", "Value: " + Float.toString(url_size));
+            /*String url_addr = contentTxt.getText().toString();
+            if(url_addr != null) {
+                Log.d("ADebugTag", url_addr);
+                Uri uri = Uri.parse(url_addr); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No URL Detected...", Toast.LENGTH_SHORT);
+                toast.show();
+            }*/
+
         }
     }
-    
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         // Retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanningResult != null) {
         // A result received
-            String scanContent = scanningResult.getContents();
-            String scanFormat = scanningResult.getFormatName();
-            String scanImagePath = intent.getStringExtra(Intents.Scan.RESULT_BARCODE_IMAGE_PATH);
-            formatTxt.setText("FORMAT: " + scanFormat);
-            contentTxt.setText("CONTENT: " + scanContent);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        String scanContent = scanningResult.getContents();
+        String scanFormat = scanningResult.getFormatName();
+        //String scanImagePath = intent.getStringExtra(Intents.Scan.RESULT_BARCODE_IMAGE_PATH);
+        formatTxt.setText("FORMAT: " + scanFormat);
+        contentTxt.setText("CONTENT: " + scanContent);
     }
     /* Using new library of ZXing 3.4.0 this won't be needed anymore....
     @Override
