@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
+
     private static final int PERMISSIONS_REQUEST_CAMERA = 88;
 
     @Override
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void onClick(View v){
-        //respond to clicks
-
+        // Scan button action
         if(v.getId()==R.id.scan_button){
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    //retrieve scan result
+        // Retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
-    //we have a result
+        // A result received
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
             formatTxt.setText("FORMAT: " + scanFormat);
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     "No scan data received!", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
 
     @Override
@@ -105,4 +104,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             // result of the request.
         }
     }
+
+    // Experimental Function !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /*
+    private void checkFlag() {
+        if(flag) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "True", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "False", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+    */
+    // Experimental Function !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId "com.example.charlessuresoft.barcodescanner_dev1"
         minSdkVersion 9
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -18,12 +18,6 @@ android {
         }
     }
 }
-
-/*
-repositories {
-    jcenter()
-}
- */
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
