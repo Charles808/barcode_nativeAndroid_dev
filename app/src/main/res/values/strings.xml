@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">BarcodeScanner-Dev1</string>
-    <string name="scan">Scan</string>
+    <string name="scan_btn">Scan</string>
+    <string name="exit_btn">Exit</string>
     <string name="openSite">Open URL</string>
 </resources>
