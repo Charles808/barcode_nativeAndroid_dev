@@ -24,10 +24,11 @@
         android:layout_toLeftOf="@+id/centerHorizont">
 
         <Button
+            android:id="@+id/flashSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/scan_btn"
-            android:onClick="scanApp" />
+            android:text="@string/flash_btn"
+            android:onClick="flashApp" />
 
         <Button
             android:layout_width="match_parent"

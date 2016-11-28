@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String DTAG = "MainActivity";
     private DecoratedBarcodeView barcodeView;
     private String scanText, formatText;
+    private Button flashBtn;
 
     /*private enum ParseResult {
         URL,
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         barcodeView = (DecoratedBarcodeView) findViewById(R.id.barcode_scanner);
         barcodeView.decodeContinuous(callback);
+
+        flashBtn = (Button)findViewById(R.id.flashSwitch);
     }
 
     @Override
@@ -97,11 +100,7 @@ public class MainActivity extends AppCompatActivity {
         barcodeView.pause();
     }
 
-    public void scanApp(View view) {
-        //barcodeView.resume();
-    }
-
-    public void exitApp(View view) {
+    public void flashApp(View view) {
         //barcodeView.resume();
     }
 
