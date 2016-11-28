@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
             */
 
             scanText = result.getText();
-            //formatText = result.get
+            formatText = result.getBarcodeFormat().toString();
             barcodeView.setStatusText(result.getText());
 
             //Added preview of scanned barcode
             ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
             imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
 
-            switchActivity(scanText);
+            switchActivity(scanText, formatText);
             //barcodeView.pause();
         }
 
@@ -105,35 +105,57 @@ public class MainActivity extends AppCompatActivity {
         //barcodeView.resume();
     }
 
-    private void switchActivity(String dataString) {
+    private void switchActivity(String dataString, String formatString) {
 
         Log.d(DTAG, "Switching Activity");
+        Log.d(DTAG, "dataString : " + dataString);
+        Log.d(DTAG, "formatString : " + formatString);
+
+        Intent intent;
+
         int parseResult = parseData(dataString);
 
         switch (parseResult) {
             case 1:
                 // URL
+                Log.d(DTAG, "Switched to : UrlActivity");
+
+                intent = new Intent(this, UrlActivity.class);
+                intent.putExtra("DATA_STRING", dataString);
+
+                startActivity(intent);
                 break;
+
             case 2:
                 // VCARD
+                Log.d(DTAG, "Switched to : VcardActivity");
+
+                intent = new Intent(this, VcardActivity.class);
+                intent.putExtra("DATA_STRING", dataString);
+
+                startActivity(intent);
                 break;
+
             case 3:
                 break;
+
             case 4:
                 break;
+
             default:
                 // WEB SEARCH
                 Log.d(DTAG, "Switched to : SearchActivity");
-                Log.d(DTAG, "dataString : " + dataString);
 
-                Intent intent = new Intent(this, SearchActivity.class);
+                intent = new Intent(this, SearchActivity.class);
                 intent.putExtra("DATA_STRING", dataString);
+                intent.putExtra("FORMAT_STRING", formatString);
+
                 startActivity(intent);
                 break;
         }
     }
 
     private int parseData(String rawString) {
-        return 0;
+        return 2;
     }
 }

@@ -8,18 +8,23 @@ import android.widget.TextView;
 public class SearchActivity extends AppCompatActivity {
 
     private static final String DTAG = "SearchActivity";
-    TextView searchView;
+    TextView searchView, formatView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Log.d(DTAG, "Inside SearchActivity");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
         searchView = (TextView) findViewById(R.id.searchText);
+        formatView = (TextView) findViewById(R.id.formatText);
+
         String searchStr = getIntent().getStringExtra("DATA_STRING");
+        String formatStr = getIntent().getStringExtra("FORMAT_STRING");
+
         searchView.setText(searchStr);
+        formatView.setText(formatStr);
     }
 
     @Override
