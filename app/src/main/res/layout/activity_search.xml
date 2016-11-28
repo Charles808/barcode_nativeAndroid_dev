@@ -27,4 +27,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/formatText" />
+
+    <Button
+        android:text="@string/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchText"
+        android:layout_centerHorizontal="true"
+        android:onClick="searchApp"/>
 </RelativeLayout>

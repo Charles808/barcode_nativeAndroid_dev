@@ -156,6 +156,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int parseData(String rawString) {
-        return 2;
+        return 0;
     }
 }

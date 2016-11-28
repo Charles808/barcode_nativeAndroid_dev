@@ -1,8 +1,11 @@
 package com.example.charlessuresoft.barcodescanner_dev1;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class SearchActivity extends AppCompatActivity {
@@ -40,5 +43,11 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void searchApp(View view) {
+        Intent search = new Intent(Intent.ACTION_WEB_SEARCH);
+        search.putExtra(SearchManager.QUERY, searchView.getText());
+        startActivity(search);
     }
 }

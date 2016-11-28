@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">BarcodeScanner-Dev1</string>
+
     <string name="scan_btn">Scan</string>
     <string name="exit_btn">Exit</string>
+    <string name="search_btn">Web Search</string>
+
     <string name="scan_txt">Scan Result</string>
     <string name="format_txt">Code Format</string>
     <string name="url_txt">URL Link</string>
     <string name="vcard_txt">Vcard Data</string>
+
     <string name="openSite">Open URL</string>
 </resources>
