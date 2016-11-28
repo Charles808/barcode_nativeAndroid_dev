@@ -24,9 +24,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".UrlActivity"></activity>
-        <activity android:name=".VcardActivity"></activity>
+
+        <activity android:name=".SearchActivity"
+                  android:launchMode = "singleTask">
+        </activity>
+
+        <activity android:name=".UrlActivity"
+                  android:launchMode = "singleTask">
+
+        </activity>
+
+        <activity android:name=".VcardActivity"
+                  android:launchMode = "singleTask">
+
+        </activity>
     </application>
 
 </manifest>
