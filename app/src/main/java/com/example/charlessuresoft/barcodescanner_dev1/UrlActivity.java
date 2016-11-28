@@ -1,7 +1,10 @@
 package com.example.charlessuresoft.barcodescanner_dev1;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class UrlActivity extends AppCompatActivity {
@@ -14,5 +17,30 @@ public class UrlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_url);
 
         urlView = (TextView) findViewById(R.id.urlText);
+
+        String urlStr = getIntent().getStringExtra("DATA_STRING");
+
+        urlView.setText(urlStr);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void gotoUrlApp (View view) {
+        Uri uriUrl = Uri.parse(urlView.getText().toString());
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 }
