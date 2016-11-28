@@ -137,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 3:
-                break;
-
-            case 4:
+                // later...
                 break;
 
             default:
@@ -156,6 +154,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int parseData(String rawString) {
-        return 0;
+
+        Log.d(DTAG, rawString);
+
+        if(rawString.startsWith("https://",0) || rawString.startsWith("http://",0))
+            return 1;
+        else if(rawString.startsWith("BEGIN:VCARD", 0) && rawString.contains("END:VCARD"))
+            return 2;
+        else
+            return 0;
     }
 }
