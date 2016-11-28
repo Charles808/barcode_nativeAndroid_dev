@@ -31,6 +31,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String DTAG = "MainActivity";
     private DecoratedBarcodeView barcodeView;
     private String scanText, formatText;
 
@@ -45,20 +46,26 @@ public class MainActivity extends AppCompatActivity {
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
+
+            Log.d(DTAG, "Barcode Detected");
+
+            /*
             if(result.getText() == null || result.getText().equals(scanText)) {
                 // Prevent duplicate scans
                 return;
             }
+            */
 
             scanText = result.getText();
-
+            //formatText = result.get
             barcodeView.setStatusText(result.getText());
 
             //Added preview of scanned barcode
             ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
             imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
 
-            barcodeView.pause();
+            switchActivity(scanText);
+            //barcodeView.pause();
         }
 
         @Override
@@ -91,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanApp(View view) {
-        barcodeView.resume();
+        //barcodeView.resume();
     }
 
     public void exitApp(View view) {
@@ -100,18 +107,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void switchActivity(String dataString) {
 
+        Log.d(DTAG, "Switching Activity");
         int parseResult = parseData(dataString);
 
         switch (parseResult) {
             case 1:
+                // URL
                 break;
             case 2:
+                // VCARD
                 break;
             case 3:
                 break;
             case 4:
                 break;
             default:
+                // WEB SEARCH
+                Log.d(DTAG, "Switched to : SearchActivity");
+                Log.d(DTAG, "dataString : " + dataString);
+
+                Intent intent = new Intent(this, SearchActivity.class);
+                intent.putExtra("DATA_STRING", dataString);
+                startActivity(intent);
                 break;
         }
     }

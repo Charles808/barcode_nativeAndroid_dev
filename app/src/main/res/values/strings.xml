@@ -2,5 +2,6 @@
     <string name="app_name">BarcodeScanner-Dev1</string>
     <string name="scan_btn">Scan</string>
     <string name="exit_btn">Exit</string>
+    <string name="scan_txt">Scan Result</string>
     <string name="openSite">Open URL</string>
 </resources>

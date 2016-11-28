@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId "com.example.charlessuresoft.barcodescanner_dev1"
         minSdkVersion 9
-        targetSdkVersion 25
-        versionCode 1
+        targetSdkVersion 22
+        versionCode 3
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
