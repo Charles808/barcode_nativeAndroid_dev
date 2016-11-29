@@ -30,11 +30,6 @@
             android:text="@string/flash_btn"
             android:onClick="flashApp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/exit_btn"
-            android:onClick="exitApp" />
     </LinearLayout>
 
     <View

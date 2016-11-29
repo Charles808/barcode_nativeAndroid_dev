@@ -3,7 +3,7 @@
 
     <string name="scan_btn">Scan</string>
     <string name="exit_btn">Exit</string>
-    <string name="flash_btn">Flash</string>
+    <string name="flash_btn">Flash Off</string>
     <string name="search_btn">Web Search</string>
     <string name="url_btn">Go to URL</string>
 

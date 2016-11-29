@@ -3,6 +3,7 @@ package com.example.charlessuresoft.barcodescanner_dev1;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -29,12 +30,15 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        DecoratedBarcodeView.TorchListener {
 
     private static final String DTAG = "MainActivity";
     private DecoratedBarcodeView barcodeView;
-    private String scanText, formatText;
+    private String scanText = null, formatText = null;
+    private String toast = null;
     private Button flashBtn;
+    private boolean hasFlash = false, flashOn = false;
 
     /*private enum ParseResult {
         URL,
@@ -42,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         EMAIL,
         ETC
     }*/
-
 
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
@@ -77,13 +80,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         barcodeView = (DecoratedBarcodeView) findViewById(R.id.barcode_scanner);
         barcodeView.decodeContinuous(callback);
 
+        barcodeView.setTorchListener(this);
         flashBtn = (Button)findViewById(R.id.flashSwitch);
+
+        hasFlash = checkFlash();
     }
 
     @Override
@@ -100,8 +105,43 @@ public class MainActivity extends AppCompatActivity {
         barcodeView.pause();
     }
 
+    private void displayToast() {
+        if(getApplicationContext() != null && toast != null) {
+            Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_SHORT).show();
+            toast = null;
+        }
+    }
+
+    private boolean checkFlash() {
+        return getApplicationContext().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+    }
+
     public void flashApp(View view) {
         //barcodeView.resume();
+        if(hasFlash) {
+            if (!flashOn) {
+                barcodeView.setTorchOn();
+                flashOn = true;
+            } else {
+                barcodeView.setTorchOff();
+                flashOn = false;
+            }
+        }
+        else {
+            toast = "Flash Unavailable";
+            displayToast();
+        }
+    }
+
+    @Override
+    public void onTorchOn() {
+        flashBtn.setText("Flash On");
+    }
+
+    @Override
+    public void onTorchOff() {
+        flashBtn.setText("Flash Off");
     }
 
     private void switchActivity(String dataString, String formatString) {
