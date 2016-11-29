@@ -7,5 +7,6 @@
     <dimen name="font_url">14pt</dimen>
     <dimen name="font_content">12pt</dimen>
     <dimen name="font_format">10pt</dimen>
+    <dimen name="font_vcard">14pt</dimen>
 
 </resources>

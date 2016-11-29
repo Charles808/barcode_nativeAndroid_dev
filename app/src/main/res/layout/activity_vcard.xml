@@ -12,10 +12,18 @@
 
     <TextView
         android:text="@string/vcard_txt"
+        android:textSize="@dimen/font_vcard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/vcardText" />
+        android:id="@+id/vcardText"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/addContact_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="addToContactApp" />
 </RelativeLayout>

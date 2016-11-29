@@ -7,11 +7,12 @@
     <string name="search_btn">Web Search</string>
     <string name="url_btn">Go to URL</string>
     <string name="copy_btn">Copy to Clipboard</string>
+    <string name="addContact_btn">Add to Contacts</string>
 
     <string name="scan_txt">Scan Result</string>
     <string name="format_txt">Code Format</string>
     <string name="url_txt">URL Link</string>
-    <string name="vcard_txt">Vcard Data</string>
+    <string name="vcard_txt">Vcard Data Detected</string>
 
     <string name="openSite">Open URL</string>
 </resources>
