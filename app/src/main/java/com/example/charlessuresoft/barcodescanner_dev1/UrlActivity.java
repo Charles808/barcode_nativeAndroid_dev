@@ -49,7 +49,7 @@ public class UrlActivity extends AppCompatActivity {
         startActivity(launchBrowser);
     }
 
-    public void copyApp (View view) {
+    public void copyUrlApp (View view) {
         myClip = ClipData.newPlainText("text", urlView.getText().toString());
         myClipboard.setPrimaryClip(myClip);
     }

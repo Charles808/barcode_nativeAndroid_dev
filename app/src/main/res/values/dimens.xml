@@ -5,5 +5,7 @@
     <dimen name="activity_vertical_custom_margin">100dp</dimen>
 
     <dimen name="font_url">14pt</dimen>
+    <dimen name="font_content">12pt</dimen>
+    <dimen name="font_format">10pt</dimen>
 
 </resources>
