@@ -18,7 +18,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="125dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/buttonsLayout"
         android:layout_toLeftOf="@+id/centerHorizont">
@@ -27,6 +27,7 @@
             android:id="@+id/flashSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
             android:text="@string/flash_btn"
             android:onClick="flashApp" />
 
@@ -40,7 +41,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_toRightOf="@id/centerHorizont"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

@@ -7,7 +7,7 @@ android {
         applicationId "com.example.charlessuresoft.barcodescanner_dev1"
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode 118
+        versionCode 130
         versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
