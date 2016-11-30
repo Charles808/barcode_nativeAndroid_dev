@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements
             DTAG = "MainActivity",
             URL_ACT = "UrlAct",
             VCARD_ACT = "VcardAct",
-            SEARCH_ACT = "SearchAct";
+            SEARCH_ACT = "SearchAct",
+            HISTORY_ACT = "HistoryAct";
 
     private static final int CAMERA_PERMISSION = 88;
 
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements
 
     public void historyApp(View view) {
         // go to HistoryActivity
+        gotoActivity(intent, HISTORY_ACT);
     }
 
     @Override
@@ -226,9 +228,15 @@ public class MainActivity extends AppCompatActivity implements
         if(activity.contentEquals(URL_ACT)) {
             intent = new Intent(this, UrlActivity.class);
         }
+
         else if (activity.contentEquals(VCARD_ACT)) {
             intent = new Intent(this, VcardActivity.class);
         }
+
+        else if (activity.contentEquals(HISTORY_ACT)) {
+            intent = new Intent(this, HistoryActivity.class);
+        }
+
         else
         {
             intent = new Intent(this, SearchActivity.class);
