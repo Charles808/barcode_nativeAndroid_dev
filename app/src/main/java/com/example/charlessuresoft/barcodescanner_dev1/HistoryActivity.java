@@ -1,5 +1,7 @@
 package com.example.charlessuresoft.barcodescanner_dev1;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,10 +60,34 @@ public class HistoryActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void showClearDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+
+        builder.setTitle("Clear History");
+        builder.setMessage("Are you sure ?");
+        // Add the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                results.clear();
+                recreate();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        // Set other dialog properties
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     public void clearHistoryApp(View view) {
-        results.clear();
-        finish();
-        startActivity(getIntent());
+        if(results.size() != 0) {
+            showClearDialog();
+        }
     }
 
     // Function for adding array member to the List View

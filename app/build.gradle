@@ -26,10 +26,12 @@ dependencies {
     })
 
     //provide support and compatibility of the new features from API 25 for the older APIs.
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    testCompile 'junit:junit:4.12'
+    
 
     // New single library for ZXing only support Gingerbread and later version
     // API level 9++
+    compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+    compile 'com.android.support:support-v4:25.0.1'
+    testCompile 'junit:junit:4.12'
 }
