@@ -6,7 +6,6 @@ package com.example.charlessuresoft.barcodescanner_dev1;
 
 import java.util.ArrayList;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
