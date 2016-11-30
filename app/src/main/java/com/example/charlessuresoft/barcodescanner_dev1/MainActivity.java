@@ -30,13 +30,21 @@ public class MainActivity extends AppCompatActivity implements
     private static final int CAMERA_PERMISSION = 88;
 
     private DecoratedBarcodeView barcodeView;
+    private Intent intent;
 
-    private String scanText = null, formatText = null;
+    private String
+            scanText = null,
+            formatText = null,
+            timeText = null;
+
+    private long timeRaw = 0;
+
     private String toast = null;
-
     private Button flashBtn;
 
-    private boolean hasFlash = false, flashOn = false;
+    private boolean
+            hasFlash = false,
+            flashOn = false;
 
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
@@ -53,13 +61,14 @@ public class MainActivity extends AppCompatActivity implements
 
             scanText = result.getText();
             formatText = result.getBarcodeFormat().toString();
+            timeRaw = result.getTimestamp();
             barcodeView.setStatusText(result.getText());
 
             //Added preview of scanned barcode
             ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
             imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
 
-            switchActivity(scanText, formatText);
+            switchActivity();
             //barcodeView.pause();
         }
 
@@ -160,6 +169,10 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    public void historyApp(View view) {
+        // go to HistoryActivity
+    }
+
     @Override
     public void onTorchOn() {
         flashBtn.setText("Flash On");
@@ -170,35 +183,24 @@ public class MainActivity extends AppCompatActivity implements
         flashBtn.setText("Flash Off");
     }
 
-    private void switchActivity(String dataString, String formatString) {
+    private void switchActivity() {
 
         Log.d(DTAG, "Switching Activity");
-        Log.d(DTAG, "dataString : " + dataString);
-        Log.d(DTAG, "formatString : " + formatString);
+        Log.d(DTAG, "dataString : " + scanText);
+        Log.d(DTAG, "formatString : " + formatText);
+        Log.d(DTAG, "timestamp : " + timeRaw);
 
-        Intent intent;
-
-        int parseResult = parseData(dataString);
+        int parseResult = parseData(scanText);
 
         switch (parseResult) {
             case 1:
                 // URL
-                Log.d(DTAG, "Switched to : UrlActivity");
-
-                intent = new Intent(this, UrlActivity.class);
-                intent.putExtra("DATA_STRING", dataString);
-
-                startActivity(intent);
+                gotoActivity(intent, "UrlAct");
                 break;
 
             case 2:
                 // VCARD
-                Log.d(DTAG, "Switched to : VcardActivity");
-
-                intent = new Intent(this, VcardActivity.class);
-                intent.putExtra("DATA_STRING", dataString);
-
-                startActivity(intent);
+                gotoActivity(intent, "VcardAct");
                 break;
 
             case 3:
@@ -207,15 +209,31 @@ public class MainActivity extends AppCompatActivity implements
 
             default:
                 // WEB SEARCH
-                Log.d(DTAG, "Switched to : SearchActivity");
-
-                intent = new Intent(this, SearchActivity.class);
-                intent.putExtra("DATA_STRING", dataString);
-                intent.putExtra("FORMAT_STRING", formatString);
-
-                startActivity(intent);
+                gotoActivity(intent, "SearchAct");
                 break;
         }
+    }
+
+    private void gotoActivity(Intent intent, String activity) {
+
+        Log.d(DTAG, "Switched to : " + activity);
+
+        if(activity.contentEquals("UrlAct")) {
+            intent = new Intent(this, UrlActivity.class);
+        }
+        else if (activity.contentEquals("VcardAct")) {
+            intent = new Intent(this, VcardActivity.class);
+        }
+        else
+        {
+            intent = new Intent(this, SearchActivity.class);
+        }
+
+        intent.putExtra("DATA_STRING", scanText);
+        intent.putExtra("FORMAT_STRING", formatText);
+        intent.putExtra("TIME_STRING", timeText);
+
+        startActivity(intent);
     }
 
     private int parseData(String rawString) {

@@ -8,6 +8,7 @@
     <string name="url_btn">Go to URL</string>
     <string name="copy_btn">Copy to Clipboard</string>
     <string name="addContact_btn">Add to Contacts</string>
+    <string name="history_btn">History</string>
 
     <string name="scan_txt">Scan Result</string>
     <string name="format_txt">Code Format</string>
