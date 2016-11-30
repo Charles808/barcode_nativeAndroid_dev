@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final int CAMERA_PERMISSION = 88;
 
     private DecoratedBarcodeView barcodeView;
+    private HistoryActivity ha;
     private Intent intent;
 
     private String toast = null;
@@ -64,6 +65,12 @@ public class MainActivity extends AppCompatActivity implements
                 return;
             }
             */
+
+            // To avoid duplicate entry to array list
+            if(!(result.getText() == null || result.getText().equals(scanText))) {
+                Log.d(DTAG, "Add new data to history");
+                ha.addToHistory(result.getText(), result.getBarcodeFormat().toString(), result.getTimestamp());
+            }
 
             scanText = result.getText();
             formatText = result.getBarcodeFormat().toString();
@@ -97,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements
         flashBtn = (Button)findViewById(R.id.flashSwitch);
 
         hasFlash = checkFlash();
+
+        ha = new HistoryActivity();
     }
     @Override
     protected void onResume() {

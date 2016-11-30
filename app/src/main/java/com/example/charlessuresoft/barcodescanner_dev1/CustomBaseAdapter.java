@@ -23,33 +23,37 @@ public class CustomBaseAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
-    public int getCount() {
-        return searchArrayList.size();
-    }
-
+    // These three function is not used yet, but must be defined
+    // since this is not Abstract class
+    public int getCount() { return searchArrayList.size(); }
     public Object getItem(int position) {
         return searchArrayList.get(position);
     }
-
     public long getItemId(int position) {
         return position;
     }
 
+    // Get a View that displays the data at the specified position in the data set, inflated it from an XML layout file.
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
+            // Inflate view with our custom xml file
             convertView = mInflater.inflate(R.layout.activity_historylist, null);
+            // Definition of our holder
             holder = new ViewHolder();
-            holder.txtScan = (TextView) convertView.findViewById(R.id.name);
-            holder.txtFormat = (TextView) convertView.findViewById(R.id.cityState);
-            holder.txtTime = (TextView) convertView.findViewById(R.id.phone);
+            // Chaining holder member with related id in their respective xml
+            holder.txtScan = (TextView) convertView.findViewById(R.id.scanListTxt);
+            holder.txtFormat = (TextView) convertView.findViewById(R.id.formatListTxt);
+            holder.txtTime = (TextView) convertView.findViewById(R.id.timeListTxt);
 
+            // Save holder to memory
             convertView.setTag(holder);
         }
         else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        // Set member value to list view
         holder.txtScan.setText(searchArrayList.get(position).getScanResult());
         holder.txtFormat.setText(searchArrayList.get(position).getFormatResult());
         holder.txtTime.setText(searchArrayList.get(position).getTimeResult());
@@ -57,6 +61,7 @@ public class CustomBaseAdapter extends BaseAdapter {
         return convertView;
     }
 
+    // Holder for items which will be displayed on each row
     static class ViewHolder {
         TextView txtScan;
         TextView txtFormat;
