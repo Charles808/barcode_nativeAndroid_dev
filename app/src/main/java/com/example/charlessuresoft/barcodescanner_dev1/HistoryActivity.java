@@ -88,6 +88,9 @@ public class HistoryActivity extends AppCompatActivity {
         if(results.size() != 0) {
             showClearDialog();
         }
+        else {
+            Toast.makeText(HistoryActivity.this, "History is already EMPTY", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Function for adding array member to the List View
