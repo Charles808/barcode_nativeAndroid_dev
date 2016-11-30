@@ -26,12 +26,18 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
         DecoratedBarcodeView.TorchListener {
 
-    private static final String DTAG = "MainActivity";
+    private static final String
+            DTAG = "MainActivity",
+            URL_ACT = "UrlAct",
+            VCARD_ACT = "VcardAct",
+            SEARCH_ACT = "SearchAct";
+
     private static final int CAMERA_PERMISSION = 88;
 
     private DecoratedBarcodeView barcodeView;
     private Intent intent;
 
+    private String toast = null;
     private String
             scanText = null,
             formatText = null,
@@ -39,12 +45,11 @@ public class MainActivity extends AppCompatActivity implements
 
     private long timeRaw = 0;
 
-    private String toast = null;
-    private Button flashBtn;
-
     private boolean
             hasFlash = false,
             flashOn = false;
+
+    private Button flashBtn;
 
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
@@ -195,12 +200,12 @@ public class MainActivity extends AppCompatActivity implements
         switch (parseResult) {
             case 1:
                 // URL
-                gotoActivity(intent, "UrlAct");
+                gotoActivity(intent, URL_ACT);
                 break;
 
             case 2:
                 // VCARD
-                gotoActivity(intent, "VcardAct");
+                gotoActivity(intent, VCARD_ACT);
                 break;
 
             case 3:
@@ -209,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements
 
             default:
                 // WEB SEARCH
-                gotoActivity(intent, "SearchAct");
+                gotoActivity(intent, SEARCH_ACT);
                 break;
         }
     }
@@ -218,10 +223,10 @@ public class MainActivity extends AppCompatActivity implements
 
         Log.d(DTAG, "Switched to : " + activity);
 
-        if(activity.contentEquals("UrlAct")) {
+        if(activity.contentEquals(URL_ACT)) {
             intent = new Intent(this, UrlActivity.class);
         }
-        else if (activity.contentEquals("VcardAct")) {
+        else if (activity.contentEquals(VCARD_ACT)) {
             intent = new Intent(this, VcardActivity.class);
         }
         else
